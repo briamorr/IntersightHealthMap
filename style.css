@@ -1,0 +1,15 @@
+#map {
+  height: 800px;
+  /* The height is 400 pixels */
+  width: 1500px;
+  /* The width is the width of the web page */
+  position: relative;
+  left: 300px;
+  top: 100px;
+}
+
+body {
+ background-image: url("background.png");
+ background-repeat: no-repeat;
+ background-color: #cccccc;
+}

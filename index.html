@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intersight Global Health</title>
+	<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--The div element for the map -->
+    <div id="map"></div>
+  <script type="text/javascript" src="data.js"></script>
+  <script>
+      var geocoder;
+      var map;
+      var image = ""
+	  var g;
+	  
+    function initMap() {
+        var options = {     
+            zoom: 5,
+            center: { lat: 38.5, lng: -95.0 },
+			disableDefaultUI: true,
+			styles: [
+            { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+            {
+              elementType: "labels.text.stroke",
+              stylers: [{ color: "#242f3e" }],
+            },
+            {
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#746855" }],
+            },
+            {
+              featureType: "administrative.locality",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "poi",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "geometry",
+              stylers: [{ color: "#263c3f" }],
+            },
+            {
+              featureType: "poi.park",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#6b9a76" }],
+            },
+            {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [{ color: "#38414e" }],
+            },
+            {
+              featureType: "road",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#212a37" }],
+            },
+            {
+              featureType: "road",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#9ca5b3" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry",
+              stylers: [{ color: "#746855" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#1f2835" }],
+            },
+            {
+              featureType: "road.highway",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#f3d19c" }],
+            },
+            {
+              featureType: "transit",
+              elementType: "geometry",
+              stylers: [{ color: "#2f3948" }],
+            },
+            {
+              featureType: "transit.station",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }],
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [{ color: "#17263c" }],
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#515c6d" }],
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.stroke",
+              stylers: [{ color: "#17263c" }],
+            },
+          ],
+        }
+        var map = new google.maps.Map(document.getElementById('map'), options);
+       geocoder = new google.maps.Geocoder();
+   	  for (var x = 0; x < address.length; x++) {
+        codeAddress(address[x], health[x], summary[x], geocoder, map);
+	  }
+      }
+
+      function codeAddress(address, health, summary, geocoder, map) {
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+		  if (status == google.maps.GeocoderStatus.OK)
+		  {
+	  		const infowindow = new google.maps.InfoWindow({content: '<h1 id="firstHeading" class="firstHeading">' + address + "</h1><br>" + summary,});
+            var marker = new google.maps.Marker({
+              map: map,
+              icon: health,
+              position: results[0].geometry.location,
+            });
+            marker.addListener("click", () => {infowindow.open(map, marker);});
+
+		  }else{
+			 alert(JSON.stringify(status));
+		  }
+		});
+
+	}
+    </script>   
+
+   <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe7LjI_NjvfLKiegDOUadFYpbtfDpr98Y&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+</html>
