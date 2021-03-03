@@ -1,22 +1,23 @@
 # IntersightHealthMap
-Example using Intersight location tags to geomap faults
-
+Example using Intersight location tags to map faults
 
 <img src="README.png">
 
 
 # Usage
-Step 1 - Add Intersight public API key in .env
+Step 1 - Tag objects in Intersight with a key value pair such as "Location: Boston" or "Location: Miami".
 
-Step 2 - Add Intersight secret API key in SecreyKey.txt
+Step 2 - Add Intersight public API key in .env
 
-Step 3 - Add GCP service account JSON key w/bucket privileges to GoogleSecretKey.json 
+Step 3 - Add Intersight secret API key in SecreyKey.txt
 
-Step 4 - Edit google maps api key in index.html
+Step 4 - Add GCP service account JSON key w/bucket privileges to GoogleSecretKey.json 
 
-Step 5 - Upload *.html *.css *.png to GCP bucket
+Step 5 - Edit google maps api key in index.html
 
-Step 6 - Run fetchalarmsformaps.py which will query intersight and upload data.js to the GCP bucket
+Step 6 - Upload *.html *.css *.png to GCP bucket
+
+Step 7 - Run fetchalarmsformaps.py which will query intersight and upload data.js to the GCP bucket
 
 
 # File Descriptions
